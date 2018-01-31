@@ -30,14 +30,14 @@ function productInfo() {
     inquirer.prompt([
         {
             type: "input",
-            message: "What is the Item ID of the product you would like to buy?".cyan,
+            message:"What is the Item ID of the product you would like to buy?".cyan,
             name: "product_name",    
         },
 
         {
             type: "input",
             name: "stock_quantity",
-            message: "How many units of this product would you like to buy?".cyan,    
+            message:"How many units of this product would you like to buy?".cyan,    
         } 
     ])
     //
@@ -64,13 +64,13 @@ function productInfo() {
                         if (err) throw err;
 
                         console.log('\nYour order has been placed! Your total is $' + productRes.price * quantity);
-                        console.log('\nThank you for shopping with us!');
+                        // console.log('\nThank you for shopping with us!');
                         console.log("--------------------------------------------------------------------------------\n".rainbow);
                         keepShopping();
                     })
                 } else {
-                    console.log("Sorry, that item is not in stock.\n" +
-                        "Please select another item.\n" +
+                    console.log("\nSorry, that item is not in stock."); 
+                    console.log("Please select another item.\n" +
                         "You selected " + productRes.product_name + " and it has " + productRes.stock_quantity + " left in stock.");
                     keepShopping();//directs to the 'Keep Shopping' function if user wishes to continue
                 }
@@ -86,7 +86,7 @@ function keepShopping() {
         //I updated the module changing 'Y/n' to 'Y/N' for aesthetics
         {
             type: "confirm",
-            message: "Would you like to keep shopping?".red,
+            message: "\nWould you like to keep shopping?".red,
             name: "confirm"
         }
     ]).then(function (res) {
