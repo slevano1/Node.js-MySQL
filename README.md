@@ -18,6 +18,9 @@ Because screenshots (and well-written READMEs) are extremely important in the co
 
 If you haven't written a markdown file yet, click here for a rundown, or just take a look at the raw file of these instructions.
 
+![.gif of working customer file](bamazon.gif)
+
+
 ## Instructions
 
 ### Challenge #1: Customer View (Minimum Requirement)
