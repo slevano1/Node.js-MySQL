@@ -19,8 +19,8 @@ connection.connect(function(err) {
   if (err) throw err;
   //creates a welcome message with some color using the npm color module
     console.log('--------------------------------------------------------------------------------'.rainbow)
-    console.log('Welcome to Bamazon'.cyan)
-    console.log('New and Interesting Products!'.cyan)
+    console.log('\nWelcome to Bamazon\n'.cyan)
+    console.log('\nNew and Interesting Products!\n'.cyan)
     console.log('--------------------------------------------------------------------------------'.rainbow)
     //
  showAllProducts();
@@ -30,14 +30,14 @@ function productInfo() {
     inquirer.prompt([
         {
             type: "input",
-            message:"What is the Item ID of the product you would like to buy?".cyan,
+            message:"\nWhat is the Item ID of the product you would like to buy?  ".cyan,
             name: "product_name",    
         },
 
         {
             type: "input",
             name: "stock_quantity",
-            message:"How many units of this product would you like to buy?".cyan,    
+            message:"\nHow many units of this product would you like to buy?  ".cyan,    
         } 
     ])
     //
@@ -49,21 +49,21 @@ function productInfo() {
             if (err) throw err;
 
             if (response.length === 0) {
-                console.log('ERROR: Select a valid Item ID from the Products list.');
+                console.log('\nERROR: Select a valid Item ID from the Products list.');
                 showAllProducts();
             } else {
                 // Response if the quantity requested by the user is in stock
                 var productRes = response[0];
                 if (quantity <= productRes.stock_quantity) {
-                    console.log('Items in Stock. Your order consisting of ' + quantity  + " " + productRes.product_name + ' from our ' + productRes.department_name + ' Department \nis now being prepared.');
+                    console.log('\nItems in Stock. Your order consisting of ' + quantity  + " " + productRes.product_name + ' from our ' + productRes.department_name + ' Department \nis now being prepared.');
 
-                    // // Update the inventory
+                    // // Update inventory. 
                     var updateInventory = 'UPDATE products SET stock_quantity = ' + (productRes.stock_quantity - quantity) + ' WHERE id = ' + itemid;
 
                     connection.query(updateInventory, function (err, data) {
                         if (err) throw err;
 
-                        console.log('\nYour order has been placed! Your total is $' + productRes.price * quantity);
+                        console.log('\nYour order has been placed! The total is $' + productRes.price * quantity);
                         // console.log('\nThank you for shopping with us!');
                         console.log("--------------------------------------------------------------------------------\n".rainbow);
                         keepShopping();
@@ -71,7 +71,7 @@ function productInfo() {
                 } else {
                     console.log("\nSorry, that item is not in stock."); 
                     console.log("Please select another item.\n" +
-                        "You selected " + productRes.product_name + " and it has " + productRes.stock_quantity + " left in stock.");
+                        "You selected " + productRes.product_name + " and there are only " + productRes.stock_quantity + " left in stock.");
                     keepShopping();//directs to the 'Keep Shopping' function if user wishes to continue
                 }
             }
@@ -83,10 +83,10 @@ function productInfo() {
 function keepShopping() {
     inquirer.prompt([
         //'confirm' is from the npm inquirer module. Boolean value returning yes or no.
-        //I updated the module changing 'Y/n' to 'Y/N' for aesthetics
+        //I updated the 'inquirer' module; changing 'Y/n' to 'Y/N' for aesthetics
         {
             type: "confirm",
-            message: "\nWould you like to keep shopping?".red,
+            message: "\nWould you like to keep shopping?".magenta,
             name: "confirm"
         }
     ]).then(function (res) {
@@ -96,7 +96,7 @@ function keepShopping() {
             showAllProducts();
           //end the progran since customer selected 'no'  
         } else {
-            console.log("\nThank you for shopping Bamazon!".cyan);
+            console.log("\nThank you for shopping Bamazon!\n \nSee you next time!");
             console.log("--------------------------------------------------------------------------------\n".rainbow);
             connection.end();
         }
@@ -107,6 +107,7 @@ function keepShopping() {
 function showAllProducts(){
   connection.query('SELECT*FROM products', function(err,res){
     //bringing in the display table template from cli-table module
+    //made small adjustments to the cli-table module to alter the default appearence
        var theDisplayTable = new Table({
             //declare the value categories for table header
             head: ['Item ID', 'Product Name', 'Category', 'Price', 'Quantity'],
@@ -115,7 +116,7 @@ function showAllProducts(){
         });
 
     for(var i = 0; i < res.length; i++){
-      //push caategories from mySQL to display table
+      //push categories from mySQL to display table
       theDisplayTable.push(
                 [res[i].id, res[i].product_name, res[i].department_name, res[i].price, res[i].stock_quantity]
                 );
