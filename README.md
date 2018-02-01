@@ -25,7 +25,7 @@ This demo runs through different buying scenarios.
 Confirmations to continue buying -- shows the app calculating different quantities and 
 updating the inventory.  Inventory updates once the 'continue shopping' prompt is answered yes or no.  
 
-One scenario where quantity desired exceeds available inventory. 
+One scenario where quantity selected exceeds available inventory. 
 ---------------------------------------------------------------------------
 Item is in stock...
 *Prompts the user to select an item, then quantity.
