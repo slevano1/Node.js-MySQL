@@ -16,13 +16,15 @@ Include any other screenshots you deem necessary to help someone who has never b
 
 Because screenshots (and well-written READMEs) are extremely important in the context of GitHub, this will be part of the grading.
 
-If you haven't written a markdown file yet, click here for a rundown, or just take a look at the raw file of these instructions.
+
 
 ## Working File Images
 ```
 This demo runs through different buying scenarios.  
 
-Three confirmations to continue buying which show the app calculating different quantities and updating the inventory.  Inventory updates after the 'continue shopping' prompt is answered yes or no.  One scenario where quantity desired exceeds available inventory. 
+Three confirmations to continue buying which show the app calculating different quantities and 
+updating the inventory.  Inventory updates after the 'continue shopping' prompt is answered yes or no.  
+One scenario where quantity desired exceeds available inventory. 
 ---------------------------------------------------------------------------
 Item is in stock...
 *Prompts the user to select an item, then quantity desired.
@@ -34,13 +36,20 @@ Prompt to continue shopping.  Y/N
 
 If Yes answer and item is not available...
 *Prompts the user to select an item, then quantity desired.
-*Quantity exceeds inventory -> confirmation item is unavailable, asks user to select another item, confirms quantity that is available
+*Quantity exceeds inventory -> confirmation item is unavailable, asks user to select another item, 
+confirms quantity that is available
 
 Prompt to continue shopping.  Y/N  
 *Select N -> Thanks user for shopping Bamazon. 
 
 ```
 ![.gif of working customer file](bamazon_.gif)
+
+```
+Demo of node application working with mysql database to update inventory
+```
+
+![.gif of node application working with mysql database to update inventory](bamazon_mysql.gif)
 
 
 ## Instructions
