@@ -57,22 +57,23 @@ function productInfo() {
                 if (quantity <= productRes.stock_quantity) {
                     console.log('\nItems in Stock. Your order consisting of ' + quantity  + " " + productRes.product_name + ' from our ' + productRes.department_name + ' Department \nis now being prepared.');
 
-                    // // Update inventory. 
+                    // Update inventory using SET to focus on stock_quantity.  Qty chosen on the interface subtracts from stock noted in MySQL
+                    //WHERE focuses on the row product is located in
                     var updateInventory = 'UPDATE products SET stock_quantity = ' + (productRes.stock_quantity - quantity) + ' WHERE id = ' + itemid;
-
+                    // uses var created above to connect and update inventory
                     connection.query(updateInventory, function (err, data) {
                         if (err) throw err;
 
                         console.log('\nYour order has been placed! The total is $' + productRes.price * quantity);
                         // console.log('\nThank you for shopping with us!');
                         console.log("--------------------------------------------------------------------------------\n".rainbow);
-                        keepShopping();
+                        keepShopping();//option for user to keep shopping.  Y/N option
                     })
                 } else {
-                    console.log("\nSorry, that item is not in stock."); 
+                    console.log("\nSorry, that item is not in stock.".red); 
                     console.log("Please select another item.\n" +
                         "You selected " + productRes.product_name + " and there are only " + productRes.stock_quantity + " left in stock.");
-                    keepShopping();//directs to the 'Keep Shopping' function if user wishes to continue
+                    keepShopping();//directs to the 'Keep Shopping' function if user wishes to select a lesser quantity or diff item
                 }
             }
         })
@@ -92,7 +93,7 @@ function keepShopping() {
     ]).then(function (res) {
         if (res.confirm) {
             console.log("--------------------------------------------------------------------------------\n".rainbow);
-            //brings back the shopping options since customer wants to continue shopping
+            //brings back the shopping options since customer wants to continue shopping-->row 107
             showAllProducts();
           //end the progran since customer selected 'no'  
         } else {
